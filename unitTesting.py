@@ -40,8 +40,7 @@ class TestCommandSystem(async_unittest.TestCase):
 
     def test_get_help(self):
         result = self.cmd_system.get_help('', '')
-        print('Showing help:\n` other`: sum\n` hello`: hi\nTo learn more about a command, use `help <command>`', result)
-        # self.assertEqual(result, 'Showing help:\n` other`: sum\n` hello`: hi\nTo learn more about a command, use `help <command>`')
+        self.assertEqual(result, 'Showing help:\n`other`: sum \n`hello`: hi\nTo learn more about a command, use `help <command>`')
 
     def test_get_help_test_full(self):
         result = self.cmd_system.get_help('test')

@@ -118,7 +118,9 @@ class CommandSystem(BaseCommand):
     def get_help(self, help_cmd, *args, prefix=''):
         """Makes the help for this command system/a child command system and messages it back"""
         cmd_args = help_cmd.split(' ')
-        new_prefix = prefix + self._system_name + ' '
+        new_prefix = prefix
+        if self._system_name:
+            new_prefix += self._system_name + ' '
         cmd = self._lookup_cmd(cmd_args[0]) if cmd_args else None
         if cmd:
             if isinstance(cmd, CommandSystem):
