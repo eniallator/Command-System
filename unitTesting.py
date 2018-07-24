@@ -39,12 +39,28 @@ class TestCommandSystem(async_unittest.TestCase):
         self.assertEqual(result, 'Error insufficient permissions for this command.')
 
     def test_get_help(self):
-        result = self.cmd_system.get_help('', '')
-        self.assertEqual(result, 'Showing help:\n`other`: sum \n`hello`: hi\nTo learn more about a command, use `help <command>`')
+        result = self.cmd_system.get_help('', 'arg')
+        self.assertEqual(result, 'Showing help:\n`other`: sum arg\n`hello`: hi\nTo learn more about a command, use `help <command>`')
 
     def test_get_help_test_full(self):
         result = self.cmd_system.get_help('test')
         self.assertEqual(result, 'full')
+
+    def test_get_help_other_full(self):
+        result = self.cmd_system.get_help('other', 'arg')
+        self.assertEqual(result, 'full arg')
+
+    def test_get_nested_help_command_system_hello(self):
+        result = self.cmd_system.get_help('hello')
+        self.assertEqual(result, 'Showing help for hello:\n`hello goodbye`: bye\nTo learn more about a command, use `help <command>`')
+
+    def test_get_nested_help_command_system_goodbye(self):
+        result = self.cmd_system.get_help('hello goodbye')
+        self.assertEqual(result, 'Showing help for goodbye:\nTo learn more about a command, use `help <command>`')
+
+    def test_get_help_invalid(self):
+        result = self.cmd_system.get_help('error')
+        self.assertEqual(result, 'Unknown command. Use "help" to get a list of commands.')
 
 
 async_unittest.main()

@@ -107,7 +107,7 @@ class CommandSystem(BaseCommand):
         """Generates the help for the command system"""
         help_message = 'Showing help:'
         if self._system_name:
-            help_message = 'Showing help for ' + self._system_name + ': '
+            help_message = 'Showing help for ' + self._system_name + ':'
         for cmd_string in self._commands:
             cmd = self._commands[cmd_string]
             if self._validate_permissions(cmd, args):
